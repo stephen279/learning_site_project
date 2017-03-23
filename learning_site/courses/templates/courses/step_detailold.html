@@ -1,0 +1,72 @@
+    {% extends "courses/layout.html" %}
+    {% load course_extras %}
+
+    {% block title %}{{ step.title }} | {{ step.course.title }} {{ block.super }}{% endblock %}
+
+    {% block breadcrumbs %}
+        <li><a href="{% url 'courses:detail' pk=step.course.pk %}">{{ step.course.title }}</a></li>
+    {% endblock %}
+
+    {% block content %}
+        <div class="row columns">
+            <article>
+                {{ block.super }}
+                <h1>{{ step.title }}</h1>
+                <button onclick="getCurTime()" class="button">Record problem at current time position</button>
+            <form action="">
+              TimeStamp:<br>
+              <input type="text" name="timestamp" value="" id="textfield">
+              Feedback<br>
+              <input type="text" name="feedback" value="">
+              <input type="submit"  class ="button" value="Send">
+            </form>
+
+             <!--   <button onclick="setCurTime()" class="button">Go back 15 seconds</button><br> -->
+            </article>
+
+             <article>
+                <video id="video" width="800"  controls>
+                <source src="{{ step.video.url  }}" class="video-responsive" type="video/mp4">
+
+                 Your browser does not support HTML5 video.
+                </video>
+
+                {{ step.content|markdown_to_html }}
+
+                   <dl>
+                {% for step in steps %}
+                    <dt>
+                        <a href="{% url 'courses:step' course_pk=course.pk step_pk=step.pk %}">{{ step.title }}</a>
+                    </dt>
+                    <dd>{{ step.description|markdown_to_html }}</dd>
+                {% endfor %}
+                     </dl>
+
+            </article>
+         </div>
+
+            <script>
+              $(document).ready(function(){
+
+                 $("form").hide();
+
+                });
+
+                var vid = document.getElementById("video");
+
+                function getCurTime() {
+                  var x = document.getElementById("textfield");
+                  x.setAttribute("type", "text");
+                  x.setAttribute("value", vid.currentTime);
+                  $("form").show();
+
+                }
+
+                function setCurTime() {
+                    vid.currentTime=vid.currentTime-15;
+                }
+
+            </script>
+
+
+    {% endblock %}

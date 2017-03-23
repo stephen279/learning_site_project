@@ -1,0 +1,236 @@
+    {% extends "courses/layout.html" %}
+    {% load course_extras %}
+
+    {% block title %}{{ step.title }} | {{ step.course.title }} {{ block.super }}{% endblock %}
+
+    {% block breadcrumbs %}
+
+
+    {% endblock %}
+
+    {% block content %}
+
+     <html>
+  <head>
+    <title>Bootstrap 101 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+
+      <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  </head>
+        <script type="text/javascript" src="http://www.chartjs.org/assets/Chart.js"></script>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+        <script src="http://code.jquery.com/jquery.js"></script>
+
+        <div class="row columns">
+            <article>
+                {{ block.super }}
+                <h1>{{ step.title }}</h1>
+             <!--   <button onclick="getCurTime()" class="button">Records problem at current time position</button>
+            <form action="">
+              TimeStamp:<br>
+              <input type="text" name="timestamp" value="" id="textfield">
+              Feedback<br>
+              <input type="text" name="feedback" value="">
+              <input type="submit"  class ="button" value="Send">
+            </form>
+
+            -->
+
+             <!--   <button onclick="setCurTime()" class="button">Go back 15 seconds</button><br> -->
+            </article>
+
+             <article>
+                <video id="video" width="1150"  controls>
+                <source src="{{ step.video.url  }}" class="video-responsive" type="video/mp4">
+
+                 Your browser does not support HTML5 video.
+                </video>
+
+
+
+
+           <dl>
+                {% for step in steps %}
+                      <div class="callout first">
+
+                 <a href="">{{ step.title }}</a>
+
+
+
+
+                   Time:{{ step.times }}</dd><br>
+                    Feedback:{{ step.feedback }}</dd>
+
+                     <br>
+                     </div>
+                {% endfor %}
+            </dl>
+
+            </article>
+            <hr>
+                    <a href="{% url 'courses:create_query'  course_pk=step.course.id step_pk=step.id %}" class="button" >Create new Query</a>
+
+         </div>
+
+            <script>
+              $(document).ready(function(){
+
+                 $("form").hide();
+
+                });
+
+                var vid = document.getElementById("video");
+
+                function getCurTime() {
+                  var x = document.getElementById("textfield");
+                  x.setAttribute("type", "text");
+                  x.setAttribute("value", vid.currentTime);
+                  $("form").show();
+
+                }
+
+                function setCurTime() {
+                    vid.currentTime=vid.currentTime-15;
+                }
+
+            </script>
+
+
+
+   <!-- Ratings Chart canvas -->
+      <div class="container" width="320" height="176">
+          <h2> Time Chart </h2>
+       <div>
+            <canvas id="myChart" width="320" height="176"></canvas>
+      </div>
+      </div>
+
+        <!-- innerHTML for ratinga -->
+
+                <div id ="step_tru1">
+                {% for step in steps %}
+
+                    <div id = "par1">{{ step.times }}</div>
+
+
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+   <!-- function for rating canvas -->
+     <script type="text/javascript">
+
+
+
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+
+
+function func(x,y){
+
+
+        console.log("func called");
+
+
+    var color =  "rgba(153,255,51,0.6)";
+    var myBarChart = new Chart(ctx, {
+    type: 'line',
+    data: 'data',
+      options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    max:5,
+                    min: 0,
+                    stepSize: 1
+                }
+            }]
+        }
+    },
+
+
+     data:{
+    labels: x,
+    datasets: [
+        {
+            label: "Not Understanding Timestamps Chart",
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1,
+
+            data:y
+            }]
+          }
+        });
+
+
+}
+
+
+
+            var tRow = document.getElementById('step_tru1');
+            var i;
+            var all = new Array();
+            for (i=0; i<12; i++){
+            var x = tRow.children[i].innerHTML;
+            all[i]=x;
+            all.sort();
+            var  counts = {};
+            all.forEach(function(i) {
+             counts[i] = (counts[i] || 0)+1;
+
+             });
+
+               console.log(counts)
+
+
+             var key = Object.keys(counts);
+            var value = Object.values(counts);
+           // console.log(bad_materialvalue);
+             var badly_explainedkey = Object.keys(counts)[1];
+            var badly_explainedvalue = counts.badly_explained;
+           // console.log(counts.badly_explainedvalue);
+
+            var too_difficultkey = Object.keys(counts)[2];
+            var too_difficultvalue = counts.too_difficult;
+           // console.log(counts.too_difficultvalue);
+
+            var valueArray =[value];
+            var keyArray = [key];
+            console.log("keyvalue"+valueArray);
+              console.log("keyArray"+keyArray);
+
+func(key,value);
+
+
+}
+
+
+  </script>
+
+    {% endblock %}
+
+     </html>

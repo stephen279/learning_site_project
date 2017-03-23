@@ -1,0 +1,31 @@
+    {% extends "courses/layout.html" %}
+    {% load course_extras %}
+
+    {% block title %}{{ step.course.title }} | {{ step.course.title }} {{ block.super }}{% endblock %}
+
+    {% block breadcrumbs %}
+
+    {% endblock %}
+
+    {% block content %}
+        <div class="row columns">
+            <article>
+                {{ block.super }}
+                <h1>{{ step.title }}</h1>
+                  <h1>{{ step.description }}</h1>
+
+             <!--   <button onclick="setCurTime()" class="button">Go back 15 seconds</button><br> -->
+            </article>
+
+             <article>
+
+           <dl>
+
+            </dl>
+
+            </article>
+         </div>
+
+
+
+    {% endblock %}

@@ -15,7 +15,7 @@ def newest_course():
 
 
 @register.inclusion_tag('courses/course_nav.html')
-def nav_courses_list(): 
+def nav_courses_list():
     '''Returns dictionary of courses to display as navigation pane'''
     courses = Course.objects.all()[:5]
     return {'courses': courses}

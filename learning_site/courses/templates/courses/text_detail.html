@@ -1,0 +1,103 @@
+    {% extends "courses/layout.html" %}
+    {% load course_extras %}
+
+    {% block title %}{{ step.title }} | {{ step.course.title }} {{ block.super }}{% endblock %}
+
+    {% block breadcrumbs %}
+
+
+    {% endblock %}
+
+    {% block content %}
+
+     <html>
+  <head>
+    <title>Bootstrap 101 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+
+      <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  </head>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+        <script src="http://code.jquery.com/jquery.js"></script>
+
+        <div class="row columns">
+            <article>
+                {{ block.super }}
+                <h1>{{ step.title }}</h1>
+             <!--   <button onclick="getCurTime()" class="button">Records problem at current time position</button>
+            <form action="">
+              TimeStamp:<br>
+              <input type="text" name="timestamp" value="" id="textfield">
+              Feedback<br>
+              <input type="text" name="feedback" value="">
+              <input type="submit"  class ="button" value="Send">
+            </form>
+
+            -->
+
+             <!--   <button onclick="setCurTime()" class="button">Go back 15 seconds</button><br> -->
+            </article>
+
+             <article>
+                <video id="video" width="1150"  controls>
+                <source src="{{ step.video.url  }}" class="video-responsive" type="video/mp4">
+
+                 Your browser does not support HTML5 video.
+                </video>
+
+
+
+
+           <dl>
+                {% for step in steps %}
+                      <div class="callout first">
+
+                 <a href="">{{ step.title }}</a>
+
+
+
+
+                   Time:{{ step.times }}</dd><br>
+                    Feedback:{{ step.feedback }}</dd>
+
+                     <br>
+                     </div>
+                {% endfor %}
+            </dl>
+
+            </article>
+            <hr>
+                    <a href="{% url 'courses:create_query'  course_pk=step.course.id step_pk=step.id %}" class="button" >Create new Query</a>
+
+         </div>
+
+            <script>
+              $(document).ready(function(){
+
+                 $("form").hide();
+
+                });
+
+                var vid = document.getElementById("video");
+
+                function getCurTime() {
+                  var x = document.getElementById("textfield");
+                  x.setAttribute("type", "text");
+                  x.setAttribute("value", vid.currentTime);
+                  $("form").show();
+
+                }
+
+                function setCurTime() {
+                    vid.currentTime=vid.currentTime-15;
+                }
+
+            </script>
+
+
+    {% endblock %}

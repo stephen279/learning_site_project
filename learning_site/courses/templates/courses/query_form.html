@@ -1,0 +1,23 @@
+{% extends "courses/layout.html" %}
+
+
+
+
+
+{% block breadcrumbs %}
+
+{% endblock %}
+
+{% block content %}
+<div class ="row columns">
+    {{ block.super }}
+    <h1>Make a query</h1>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class ="button" value="Save">
+
+    </form>
+
+    </div>
+{% endblock %}
