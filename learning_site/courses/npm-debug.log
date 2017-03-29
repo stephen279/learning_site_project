@@ -1,0 +1,51 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'chart.js',
+1 verbose cli   '--save' ]
+2 info using npm@3.3.12
+3 info using node@v5.5.0
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly fetchPackageMetaData chart.js
+8 silly fetchDirectoryPackageData chart.js
+9 silly install normalizeTree
+10 silly loadCurrentTree Finishing
+11 silly loadIdealTree Starting
+12 silly install loadIdealTree
+13 silly cloneCurrentTree Starting
+14 silly install cloneCurrentTreeToIdealTree
+15 silly cloneCurrentTree Finishing
+16 silly loadShrinkwrap Starting
+17 silly install loadShrinkwrap
+18 silly loadShrinkwrap Finishing
+19 silly loadAllDepsIntoIdealTree Starting
+20 silly install loadAllDepsIntoIdealTree
+21 silly rollbackFailedOptional Starting
+22 silly rollbackFailedOptional Finishing
+23 silly runTopLevelLifecycles Starting
+24 silly runTopLevelLifecycles Finishing
+25 silly install printInstalled
+26 verbose stack Error: Refusing to install chart.js as a dependency of itself
+26 verbose stack     at checkSelf (/usr/local/lib/node_modules/npm/lib/install/validate-args.js:40:14)
+26 verbose stack     at Array.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/slide/lib/bind-actor.js:15:8)
+26 verbose stack     at LOOP (/usr/local/lib/node_modules/npm/node_modules/slide/lib/chain.js:15:14)
+26 verbose stack     at chain (/usr/local/lib/node_modules/npm/node_modules/slide/lib/chain.js:20:5)
+26 verbose stack     at /usr/local/lib/node_modules/npm/lib/install/validate-args.js:15:5
+26 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:52:35
+26 verbose stack     at Array.forEach (native)
+26 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:52:11
+26 verbose stack     at Array.forEach (native)
+26 verbose stack     at asyncMap (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:51:8)
+27 verbose cwd /Users/stephenholland/Documents/Project code/Django Feedback Project/learning_site/node_modules
+28 error Darwin 15.4.0
+29 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "chart.js" "--save"
+30 error node v5.5.0
+31 error npm  v3.3.12
+32 error code ENOSELF
+33 error Refusing to install chart.js as a dependency of itself
+34 error If you need help, you may report this error at:
+34 error     <https://github.com/npm/npm/issues>
+35 verbose exit [ 1, true ]

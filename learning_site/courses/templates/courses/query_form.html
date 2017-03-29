@@ -11,7 +11,7 @@
 {% block content %}
 <div class ="row columns">
     {{ block.super }}
-    <h1>Make a query</h1>
+    <h1>Make a new Feedback</h1>
     <form method="POST" action="">
         {% csrf_token %}
         {{ form.as_p }}
