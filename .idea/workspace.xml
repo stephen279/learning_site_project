@@ -602,8 +602,6 @@
     <MESSAGE value="just testing github changes" />
     <MESSAGE value="just testing github changes on text_details" />
     <option name="LAST_COMMIT_MESSAGE" value="just testing github changes on text_details" />
-    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
-    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
