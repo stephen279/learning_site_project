@@ -66,18 +66,8 @@
 
     </form>
 
-       <a href="{% url 'courses:create_question' quiz_pk=step.pk question_type="mc" %}" class="button">New Multiple Choice</a>
+       <a href="{% url 'courses:create_question' quiz_pk=step.pk question_type="mc" %}" class="button1">New Multiple Choice</a>
        <input type="button" class="button" value="Show Results">
-
-
-
-
-
-
-
-
-
-
 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
@@ -226,6 +216,7 @@
                    $("#myChart3").hide();
                    $("h5").hide();
                    $("h4").hide();
+
 
 
                    var tRow = document.getElementById('step_tru25');
@@ -624,7 +615,14 @@ function show(){
         });
     });
 
+    {% if request.user.is_superuser %}
 
+     $(".button1").show();
+    {% else %}
+$(".button1").hide();
+
+
+    {% endif %}
 
 </script>
 

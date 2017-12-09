@@ -28,10 +28,11 @@
         // Send the data using post
         var posting = $.post( backTime_Form1.attr('action'), backTime_Form1.serialize() );
         // if success:
-            vid.currentTime=vid.currentTime-15;
+          //  vid.currentTime=vid.currentTime-15;
         posting.done(function(data) {
-
+setCurTime();
 getCurTime();
+
             // success actions, maybe change submit button to 'friend added' or whatever
         });
         // if failure:
@@ -466,7 +467,7 @@ video {
           }
 
      function setCurTime() {
-      vid.currentTime=vid.currentTime-15;
+      vid.currentTime=vid.currentTime-4;
        }
 
           $(".button_description").click(function(){
@@ -509,7 +510,7 @@ video {
                         var all = new Array();
 
 
-                        for (i=0; i<=13; i++){
+                        for (i=0; i<=33; i++){
 
 
 
@@ -561,7 +562,7 @@ video {
 
 
         function nextVersion(){
-                    for (i=0; i<=13; i++){
+                    for (i=0; i<=33; i++){
 
                            var tRow1 = document.getElementById('step_tru4');
                            var x1 = tRow1.children[i].innerHTML;
@@ -1034,7 +1035,7 @@ video {
                     }
 
                     function setCurTime() {
-                        vid.currentTime=5;
+                        vid.currentTime=vid.currentTime-5;
                     }
 
 

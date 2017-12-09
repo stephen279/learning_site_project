@@ -30,5 +30,7 @@ urlpatterns = [
 
     url(r'(?P<pk>\d+)/$', views.course_detail, name='detail'),
 
+    url(r'(?P<pk>\d+)v/$', views.feeder_value, name='value'),
+
 
 ]

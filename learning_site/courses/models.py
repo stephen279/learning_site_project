@@ -18,6 +18,7 @@ class Course(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=255)
     description = models.TextField(null=True)
+    feeder = models.IntegerField(default=0);
     
 
 

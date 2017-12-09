@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['mylearningsite.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 
@@ -76,14 +76,14 @@ WSGI_APPLICATION = 'learning_site.wsgi.application'
 #default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
+#
 DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.mysql',
     'HOST': 'eu-cdbr-west-01.cleardb.com',
-    'USER': 'bed2306b12d6df',
-    'NAME': 'heroku_eddacf519ee66b1',
-    'PASSWORD': 'acd7d16ad3478ec',
+    'USER': 'bcda8ce4b492f3',
+    'NAME': 'heroku_3b78fbf0c4e60da',
+    'PASSWORD': '5bb797878509066',
 
 
 }
@@ -92,10 +92,11 @@ DATABASES = {
 
 
 #DATABASES = {
-#    'default': {
+ #   'default': {
   # 'ENGINE': 'django.db.backends.sqlite3',
   # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-
+  #  }
+#}
 #heroku addons:create cleardb:ignite --fork=mysql://root:root@localhost/test_database
 #    'ENGINE': 'django.db.backends.mysql',
 #    'NAME': 'test_database',

@@ -67,10 +67,9 @@ def quiz_detail(request, course_pk, step_pk):
     #now get the question id
     form = forms.SelectedForm()  #create blank form
 
-    steps_version2 = models.Answer.objects.filter(question_id=question_id).values("text_version")
-    steps_versions = list(steps_version2)[0]['text_version']
 
-    print("steps_version2",steps_versions)
+
+ #   print("steps_version2",steps_versions)
     answer_correct_order = models.Answer.objects.filter(correct="1", question_id=question_id)
 
 
@@ -79,6 +78,8 @@ def quiz_detail(request, course_pk, step_pk):
     if request.method == 'POST':
          form = forms.SelectedForm(request.POST)
          if form.is_valid():
+             steps_version2 = models.Answer.objects.filter(question_id=question_id).values("text_version")
+             steps_versions = list(steps_version2)[0]['text_version']
 
              percentage_count = models.Answer.objects.filter(question_id=question_id, order='0').values("count")
 
@@ -165,7 +166,7 @@ def quiz_detail(request, course_pk, step_pk):
              if (steps_versions == 2) & (check_previous_version == 0):
                  print("steps_version is 2")
                  models.Answer.objects.filter(question_id=question_id, correct='1').update(
-                 previous_version_percentage=percentage_send)
+                     previous_version_percentage=percentage_send)
                  print("changed previous version percentage to ",percentage_send)
 
              pass
@@ -215,7 +216,8 @@ def quiz_detail(request, course_pk, step_pk):
                  messages.add_message(request, messages.SUCCESS,
                                       "WRONG! SORRY")
 
-
+                 steps_version2 = models.Answer.objects.filter(question_id=question_id).values("text_version")
+                 steps_versions = list(steps_version2)[0]['text_version']
 
                  #get count value the add 1
                  count = models.Answer.objects.filter(question_id=question_id, order=form_value).values("count")
@@ -448,3 +450,8 @@ def select_form(request, question_pk):
         'question':question,
         'form':form,
        })
+
+
+def feeder_value(request, pk):
+    course = get_object_or_404(Course, pk=pk)
+    return render(request, 'courses/feeder_value.html', {'course': course})

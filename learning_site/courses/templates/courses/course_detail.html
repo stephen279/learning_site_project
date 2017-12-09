@@ -42,4 +42,16 @@
         </div>
         </article>
 
+        <script>
+
+        {% if request.user.is_superuser %}
+
+         $(".button").show();
+        {% else %}
+    $(".button").hide();
+
+
+        {% endif %}
+        </script>
+
 {% endblock %}
