@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^courses/', include('courses.urls', namespace='courses')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.hello_world, name='home'),
+    url(r'^$', views.test, name='test'),
 ]
 
 if settings.DEBUG:

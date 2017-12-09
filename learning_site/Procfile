@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath mylearningsite mylearningsite.wsgi --log-file -
+web: gunicorn --pythonpath  learning_site learning_site.deploy --log-file -

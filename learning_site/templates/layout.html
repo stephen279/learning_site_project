@@ -7,23 +7,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="{% static 'css/foundation.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+      <!--  <link rel="stylesheet" href="{% static 'css/layout.css' %}">-->
         {% block css %}{% endblock %}
         <script src="{% static 'js/vendor/modernizr.js' %}"></script>
         <meta class="foundation-mq">
         <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/ui-darkness/jquery-ui.css" rel="stylesheet">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
 
     </head>
     <body>
         <nav class="top-bar" role="navigation">
             <section class="top-bar-left">
                 <ul class="dropdown menu" data-dropdown-menu role="menubar">
-                    <li class="menu-text">The Learning Site</li>
+                    <li class="menu-text">My Project Site</li>
                     <li class="has-submenu">
                         <a href="#">Courses</a>
                         <ul class="submenu menu vertical" data-submenu role="menu">
@@ -38,7 +42,7 @@
         <footer class="row columns">
             <hr/>
             <div class="small-6 columns">
-                <p>&copy; The Learning Site</p>
+                <h7>&copy; My Project Site</h7>
             </div>
             <div class="small-6 columns">
                 <ul class="inline-list no-bullet float-right">
@@ -46,7 +50,7 @@
                 </ul>
             </div>
         </footer>
-        <script src="{% static 'js/vendor/jquery-2.1.4.min.js' %}"></script>
+       <!-- <script src="{% static 'js/vendor/jquery-2.1.4.min.js' %}"></script>-->
         <script src="{% static 'js/vendor/what-input.min.js' %}"></script>
         <script src="{% static 'js/foundation.min.js' %}"></script>
         {% block javascript %}{% endblock %}

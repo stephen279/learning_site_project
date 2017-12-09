@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+ <div class="row columns">
+
+
+            <form method="POST" action="" id="backTime_Form1">     <!--  remember id is used to stop refresh of page -->
+                {% csrf_token %}
+
+                {{ form.as_p }}
+                <input type="submit" class="button_submit" onclick="getCurTime()" value="<-- 15 ">
+
+
+            </form>
+        </div>
+<script>
+    $(function() {
+    $("#backTime_Form1").submit(function(event) {
+    console.log("inside non refresh");
+        //set time back 15 seconds
+        vid.currentTime=15;
+        console.log("inside non refresh");
+        // Stop form from submitting normally
+        event.preventDefault();
+        var backTime_Form1 = $(this);
+        // Send the data using post
+        var posting = $.post( backTime_Form1.attr('action'), backTime_Form1.serialize() );
+        // if success:
+        posting.done(function(data) {
+            // success actions, maybe change submit button to 'friend added' or whatever
+        });
+        // if failure:
+        posting.fail(function(data) {
+            // 4xx or 5xx response, alert user about failure
+        });
+    });
+});
+
+
+</script>
+
+</body>
+</html>

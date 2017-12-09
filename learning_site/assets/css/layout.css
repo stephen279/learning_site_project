@@ -16,7 +16,7 @@ color:#000;
 font-size:16px;
 font-weight:700
 }
-#button {
+.button4 {
 border:1px solid #0c799e;
 width:250px;
 padding:10px;
@@ -62,7 +62,7 @@ padding:2em
 div.container {
 width:960px;
 height:610px;
-margin:50px auto;
+margin:450px auto;
 font-family:'Droid Serif',serif;
 position:relative
 }
@@ -78,25 +78,7 @@ border-radius:2px;
 font-size:13px;
 text-align:center
 }
-.video {
-border:1px solid #0c799e;
-width:250px;
-padding:10px;
-font-size:16px;
-font-weight:700;
-color:#fff;
-border-radius:3px;
-background:linear-gradient(to bottom,#59d0f8 5%,#49c0e8 100%);
-cursor:pointer
-}
-#video {
-border:1px solid #0c799e;
-width:250px;
-padding:10px;
-font-size:16px;
-font-weight:700;
-color:#fff;
-border-radius:3px;
-background:linear-gradient(to bottom,#59d0f8 5%,#49c0e8 100%);
-cursor:pointer
+
+ul{
+  color:#23839;
 }

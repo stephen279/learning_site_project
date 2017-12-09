@@ -3,14 +3,19 @@
 
 
 
-
 {% block breadcrumbs %}
 
+   <li><a href="{% url 'courses:detail' pk=step.course.pk %}">{{ step.course.title }}</a></li>
 {% endblock %}
 
 {% block content %}
 <div class ="row columns">
-    {{ block.super }}
+    {{ block.super }}   -
+
+	{% for message in messages %}
+	   <p>{{ message }}</p>
+	{% endfor %}
+
     <h1>Make a new Feedback</h1>
     <form method="POST" action="">
         {% csrf_token %}

@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from decouple import config
+#from dj_database_url import parse as dburl
+import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -19,13 +22,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&s5%_8r2y$9%pbnph*xy*%v^a_!vc0bmbqz%(+l#pc@k7n2r)+'
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+ALLOWED_HOSTS = ['mylearningsite.herokuapp.com']
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -60,6 +61,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -71,27 +73,52 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'learning_site.wsgi.application'
 
-
+#default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
     'default': {
-     #'ENGINE': 'django.db.backends.sqlite3',
-     #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-
-
     'ENGINE': 'django.db.backends.mysql',
-    'NAME': 'test_database',
-    'USER': 'root',
-    'PASSWORD': 'root',
-    'HOST': 'localhost',
-    'PORT':'8889',
+    'HOST': 'eu-cdbr-west-01.cleardb.com',
+    'USER': 'bed2306b12d6df',
+    'NAME': 'heroku_eddacf519ee66b1',
+    'PASSWORD': 'acd7d16ad3478ec',
 
 
-
-    }
 }
+}
+
+
+
+#DATABASES = {
+#    'default': {
+  # 'ENGINE': 'django.db.backends.sqlite3',
+  # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
+#heroku addons:create cleardb:ignite --fork=mysql://root:root@localhost/test_database
+#    'ENGINE': 'django.db.backends.mysql',
+#    'NAME': 'test_database',
+#    'USER': 'root',
+#    'PASSWORD': 'root',
+#    'HOST': 'localhost',
+#    'PORT':'8889',
+
+        #'ENGINE': 'django.db.backends.mysql',
+        #'NAME': 'heroku_b187057ea7fba7f',
+        #'USER': 'bf9d5d164e3a46',
+        #'PASSWORD': 'd8df096c',
+        #'HOST': 'localhost',
+        #'PORT':'8889',
+
+#mysql://bf9d5d164e3a46:d8df096c@eu-cdbr-west-01.cleardb.com/heroku_b187057ea7fba7f?reconnect=true
+
+ # }
+#}
+
+#db_from_env = dj_database_url.config()
+#DATABASES['default'].update(db_from_env)
+#DATABASES = { 'default': config('DATABASE_URL', default=default_dburl, cast=dburl), }
 
 
 # Internationalization
@@ -119,3 +146,5 @@ MEDIA_URL = '/media/'    #http browser
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
 )
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

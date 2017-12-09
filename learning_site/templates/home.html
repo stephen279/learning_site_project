@@ -1,9 +1,157 @@
 {% extends "layout.html" %}
 
-{% block title %}Well hello there!{% endblock %}
+{% block title %}Feedback System{% endblock %}
 
 {% block content %}
+<style>
+
+    @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,500,300italic,500italic,700italic,900,300);
+
+
+
+.flip-container {
+  margin: 0 auto;
+  -webkit-perspective: 1000;
+  -moz-perspective: 1000;
+  float: left;
+  margin-right: 20px;
+}
+
+.flip-container:hover .flipper {
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+}
+
+.flipper {
+  -webkit-transition: 0.6s;
+  -webkit-transform-style: preserve-3d;
+  -moz-transition: 0.6s;
+  -moz-transform-style: preserve-3d;
+  position: relative;
+}
+
+.front, .back {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px solid #ccc;
+}
+
+.front {
+  z-index: 1;
+  background: #fff;
+}
+
+.flip-container, .front, .back {
+  width: 300px;
+  height: 500px;
+
+}
+
+.back {
+  -webkit-transform: rotateY(-180deg);
+  -moz-transform: rotateY(-180deg);
+  background: #f6f6f6;
+}
+
+.flip-padding {
+  padding: 20px;
+}
+
+.profile-picture {
+  width: 300px;
+  height: 400px;
+}
+
+.button-picture {
+  width: 200px;
+  height: 30px;
+}
+
+.profile-name, .profile-title {
+  text-align: center;
+}
+
+.profile-name {
+  font-size: 24px;
+  margin-top: 20px;
+  font-weight: 400;
+  margin-bottom: 0px;
+}
+
+.profile-title {
+  font-size: 16px;
+  margin-top: 5px;
+  font-weight: 300;
+  color: #2196F3;
+}
+
+.profile-devider {
+    width: 100%;
+    height: 4px !important;
+    background: #07B288;
+    position: relative;
+  margin: 0 auto;
+  margin-top: -4px;
+}
+.profile-devider:after {
+    content:'';
+    position: absolute;
+    border-style: solid;
+    border-width: 15px 15px 0;
+    border-color: #07B288 transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+    left: 135px;
+}
+
+
+</style>
     <div class="row">
-        <h1>Welcome!</h1>
+        <h1>Welcome</h1>
+
+
+
+    <div class="flip-container">
+  <div class="flipper">
+    <div class="front">
+      <img class="profile-picture"  {% load static %} <img src="{% static 'images/image1.jpg' %}" width="300px" height="300px">
+      <div class="profile-devider"></div>
+      <h3 class="profile-name">About Me</h3>
+      <h4 class="profile-title">Student</h4>
+    </div>
+    <div class="back">
+      <div class="flip-padding">My Name is Stephen Holland and i am currently completing a masters at dcu.</div>
+    </div>
+  </div>
+</div>
+        <h3>Project Overview</h3>
+            <p>My project is a web application that gathers continues unprompted feedback from uploaded online presentations. The application will analyse and correlate audience feedback information to identify level of audience engagement and understanding of the presented material using statistical methods.
+</p>
+        <h3>Research question</h3>
+        <p>Prove the hypothesis that when students give continues unprompted feedback on a presentation/lecture this Improves the Teaching of the material. Thus Improve the overall learning and understanding of the material.
+</p>
+          <h3>Your Help</h3>
+        <p> For me to prove my hypothesis i need pertictipents to help me. As a perticipient you can pick a course video to watch and give feedback on that video. There are a couple
+            of different ways to give feedback.
+            <br>1. Use the <img class="button-picture"  {% load static %} <img src="{% static 'images/button.png' %}" width="100px" height="30px"> button when you see apart of the video you dont understand.<br>
+                2. Use the <img class="feedback_button"  {% load static %} <img src="{% static 'images/feedback_button.png' %}" width="100px" height="30px"> button to give your feedback on the video.<br>
+                3. Afer each video there will be a quiz question on the material shown in the video. I would like perticipents to have ago at answering the question.<br>
+                4. During my experiments i will be changing to a newer version of the video lesson.Results  will be statistically shown in the app.
+
+
+</p>
+
+
+</div>
+
+
+
+
     </div>
 {% endblock %}
+
+

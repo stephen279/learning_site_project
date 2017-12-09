@@ -1,137 +1,416 @@
-    {% extends "courses/layout.html" %}
-    {% load course_extras %}
+{% extends "courses/layout.html" %}
+{% load course_extras %}
 
-    {% block title %}{{ step.title }} | {{ step.course.title }} {{ block.super }}{% endblock %}
+{% block title %}{{ step.title }} | {{ step.course.title }} {{ block.super }}</dd>{% endblock %}
 
-    {% block breadcrumbs %}
+{% block breadcrumbs %}
 
+   <li><a href="{% url 'courses:detail' pk=step.course.pk %}">{{ step.course.title }}</a></li>
+{% endblock %}
 
-    {% endblock %}
+{% block content %}
 
-    {% block content %}
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="UTF-8">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-
-
-
-    </head>
-
-    <body>
+    <script >
+    $(document).ready(function(){
+    $("#backTime_Form1").submit(function(event) {
 
 
 
-
-    <div class="row columns">
-        <article>
-            {{ block.super }}
-            <h1>{{ step.title }}</h1>
-            <!--   <button onclick="getCurTime()" class="button">Records problem at current time position</button>
-           <form action="">
-             TimeStamp:<br>
-             <input type="text" name="timestamp" value="" id="textfield">
-             Feedback<br>
-             <input type="text" name="feedback" value="">
-             <input type="submit"  class ="button" value="Send">
-           </form>
-
-           -->
-
-            <!--   <button onclick="setCurTime()" class="button">Go back 15 seconds</button><br> -->
-        </article>
-
-        <article >
-            <video class="video" width="1016" >
-                <source src="{{ step.video.url  }}" class="center" type="video/mp4">
-
-                Your browser does not support HTML5 video.
-            </video>
-            <button class="button1">Show Feedbacks</button>
-
-            <dl>
-                {% for step in steps %}
-                <div class="callout first">
-
-                    <a href="">{{ step.title }}</a>
-
-                    Time:{{ step.times }}</dd><br>
-                    Feedback:{{ step.feedback }}</dd>
-
-                    <br>
-                </div>
-                {% endfor %}
-            </dl>
-
-        </article>
-        <hr>
-        <a href="{% url 'courses:create_query'  course_pk=step.course.id step_pk=step.id %}" class="button">Create new
-            Feedback</a>
-
-    </div>
+        //set time back 15 seconds
 
 
+        //document.write(5 + 6);
+        // Stop form from submitting normally
+        event.preventDefault();
+        var backTime_Form1 = $(this);
+        // Send the data using post
+        var posting = $.post( backTime_Form1.attr('action'), backTime_Form1.serialize() );
+        // if success:
+            vid.currentTime=vid.currentTime-15;
+        posting.done(function(data) {
+
+getCurTime();
+            // success actions, maybe change submit button to 'friend added' or whatever
+        });
+        // if failure:
+        posting.fail(function(data) {
+
+            // 4xx or 5xx response, alert user about failure
+        });
+    });
+});
+
+
+</script>
+
+    <meta charset="UTF-8">
+    <style type="text/css">
+
+
+                 .button1 {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+
+}
+.button_description {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.button_new{
+    background-color: #4DBF97;
+    border: none;
+    color: white;
+    padding: 5px ;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+     .button_submit {
+ display: block;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 18px;
+  width: 80%;
+  max-width: 180px;
+  background: #fff; /* fallback color for old browsers */
+  background: rgba(255, 99, 125, 0.9);
+  border-radius: 8px;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: all 0.9s ease-out;
+     position: absolute;
+    top: 50%;
+}
+
+
+                 div.container {
+            width:960px;
+            height:610px;
+            margin:50px auto;
+            font-family:'Droid Serif',serif;
+            position:relative
+            }
+                 div.row columns {
+            width:960px;
+            height:610px;
+            margin:50px auto;
+            font-family:'Droid Serif',serif;
+            position:relative
+            }
+
+
+            h4 {
+    color:  blue;
+}
+
+
+video {
+   max-width:74rem;
+   width:100%;
+   max-height:30.875rem;
+   height:100%;
+   margin:0.25rem auto;
+   padding:0.051%;
+   background-color:#F5F5F5;
+}
+.round-button {
+	width:10%;
+}
+.round-button-circle {
+	width: 100%;
+	height:0;
+	padding-bottom: 100%;
+    border-radius: 50%;
+	border:5px solid #cfdcec;
+    overflow:hidden;
+
+    background: #4679BD;
+    box-shadow: 0 0 3px gray;
+}
+.round-button-circle:hover {
+	background:#30588e;
+}
+.round-button a {
+    display:block;
+	float:left;
+	width:100%;
+	padding-top:50%;
+    padding-bottom:50%;
+	line-height:1em;
+	margin-top:-0.5em;
+
+	text-align:center;
+	color:#e2eaf3;
+    font-family:Verdana;
+    font-size:1.2em;
+    font-weight:bold;
+    text-decoration:none;
+}
 
 
 
-    <!-- Ratings Chart canvas -->
-    <div class="container" width="320" height="176">
-        <h2> Time Chart </h2>
-        <div>
-            <canvas id="myChart" width="260" height="136"></canvas>
-        </div>
-        <button class="button_description">Show More Charts</button>
-        <br>
-
-        <div id = "PieChartDiv">
-             <h3> Pie Chart </h3>
-            <canvas id="myChartPie" width="260" height="136">   </h2></canvas>
-        </div>
-    </div>
-
-    <!-- innerHTML for ratinga -->
-
-    <div id="step_tru1">
-        {% for step in steps %}
-
-        <div id="par1">{{ step.times }}</div>
 
 
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+
+
+
+
+
+
+
+
+ <div class="row columns">
+    <article>
+        {{ block.super }}
+        <h1>{{ step.title }} </h1>
+
+        <h7>  {% for step in steps|slice:":1"%}     <!--shown iterate of values need to cut to one use slice-->
+          <dd> Version:{{ step.step.version}} &nbsp; <button class="button_new">Whats New?</button></dd>
+        </h7>
+
+        {% endfor%}</h7>
+
+
+
+
+        <h6>  {% for step in steps|slice:":1"%}     <!--shown iterate of values need to cut to one use slice-->
+
+            <dd> {{ step.step.new}}</dd>
+
+        {% endfor%}</h6>
+
+        <video id="myVideo" autobuffer width="580" height="576" controls>
+            <source src="{{ step.video.url  }}" type="video/mp4">
+
+            Your browser does not support HTML5 video.
+        </video>
+
+        {% for message in messages %}
+        <p>{{ message }}</p>
         {% endfor %}
 
 
+<div class="row columns">
+        <!--   <buttonTime onclick="getCurTime()" class="button default">Get current time position</buttonTime>   -->
+          <form method="POST" action="" id="backTime_Form1">     <!--  remember id is used to stop refresh of page -->
+                {% csrf_token %}
+
+                {{ form.as_p }}
+                <input type="submit" class="button"  onclick="getCurTime()" value=" Confused? go back 15 sec "/>
+
+            <!--  <div class="round-button"><div class="round-button-circle"><a href="http://example.com" class="round-button">Button!!</a></div></div>-->
+
+
+
+            </form>
+        </div>
+
+
+
+
+
+<div class="callout {% if answer.correct %}{% endif %}"> {{ step.content }}</div>
+
+        <button class="button1">Show Feedbacks</button>
+
+        <dl>
+            {% for step in steps %}
+            <div class="callout first">
+
+                <a href="">{{ step.title }}</a>
+
+                Rating:{{ step.rating }}</dd><br>
+                Feedback:{{ step.feedback }}</dd><br>
+                version:{{ step.textversion }}</dd>
+
+
+                <br>
+            </div>
+            {% endfor %}
+        </dl>
+
+    </article>
+    <hr>
+    <a href="{% url 'courses:create_query'  course_pk=step.course.id step_pk=step.id %}" class="button ">Give
+        Feedback</a>
+
+
+
+
+<!-- Ratings Chart canvas -->
+
+    <h2> Ratings Chart </h2>
+    <button class="button_version">Show More Versions</button>
+
+
+        <canvas id="myChart" width="360" height="106"></canvas>
+
+
+
+
+
+    <br>
+
+
+
+
+
+        <h4> Feedback Chart </h4>
+        <canvas id="myChartPie" width="360" height="136">   </canvas>
+
+
+         <button class="button_description">Show More Charts</button>
+
+
+
+    <div id="TimeChartDiv">
+        <h5> BackTime Button Press Chart </h5>
+          <button class="button_version_backtime">Show More Versions</button>
+        <canvas id="myChartTime" width="260" height="106">  </canvas>
     </div>
 
-    <div id="step_tru2">
-        {% for step in steps %}
-
-        <div id="par2">{{ step.feedback }}</div>
 
 
-        {% endfor %}
+
+<!-- innerHTML for ratinga -->
+
+<div id="step_tru1">
+    {% for step in steps %}
+
+    <div id="par1">{{ step.rating }}</div>
 
 
-    </div>
+    {% endfor %}
 
 
-    <!-- function for rating canvas -->
+</div>
+
+<div id="step_tru2">
+    {% for step in steps %}
+
+    <div id="par2">{{ step.feedback }}</div>
 
 
-    <script>
+    {% endfor %}
+
+
+</div>
+
+
+<div id="step_tru3">
+    {% for step in times %}
+
+    <div id="par3">{{ step.backtimes }}</div>
+
+
+    {% endfor %}
+
+
+</div>
+
+
+<div id="step_tru4">
+    {% for step in stepsversion %}
+
+    <div id="par4">{{ step.rating }}</div>
+
+
+    {% endfor %}
+
+
+</div>
+
+
+<div id="step_tru5">
+    {% for step in timesvers %}
+
+    <div id="par5">{{ step.backtimes }}</div>
+
+
+    {% endfor %}
+
+
+</div>
+
+
+     <div id="step_tru6">
+    {% for step in stepsvers %}
+
+    <div id="par6">{{ step.rating }}</div>
+
+
+    {% endfor %}
+
+
+</div>
+
+
+
+
+<!-- function for rating canvas -->
+
+
+<script>
 
 
 
         $(document).ready(function(){
 
+
+
                 $("dl").hide();
                 $("#mychart_description").hide();
                 $(".container_description").hide();
-                 $("form").hide();
                  $("#step_tru1").hide();
                  $("#step_tru2").hide();
+                  $("#step_tru3").hide();
+                  $("#step_tru4").hide();
+                  $("#step_tru5").hide();
+                  $("#step_tru6").hide();
                   $("h3").hide();
+                    $("p").hide();
+                  $("h4").hide();
+                   $("h5").hide();
+                   $("h6").hide();
+                   $(".button_version_backtime").hide();
+
+
+
+
+                   show_description_chart();
+
+
+
 
      });
 
@@ -139,25 +418,50 @@
                 $("dl").show();
                 $("#step_tru1").hide();
                 $("#step_tru2").hide();
+
                 $(".button1").val('Save');
             });
 
+             $(".button_new").click(function(){
+                $("h6").show();
+
+            });
+
+             $(".button_version").click(function(){
+
+                  nextVersion();
+            });
+
+
+                $(".button_version_backtime").click(function(){
+
+
+                  nextVersionBacktimes();
+
+            });
+             var vid = document.getElementById("myVideo");
+
             $(".button_description").click(function(){
                 $(".container_description").show();
-                show_description_chart();
+                     $("h5").show();
+                show_backTime_chart();
+                $(".button_version_backtime").show();
+                  vid.currentTime=vid.currentTime-15;
 
 
 
 
 
 
-        var vid = document.getElementById("video");
+
 
        function getCurTime() {
         var x = document.getElementById("textfield");
          x.setAttribute("type", "text");
            x.setAttribute("value", vid.currentTime);
            $("form").show();
+          vid.currentTime=15;    //goes back 15 seconds
+
 
           }
 
@@ -165,50 +469,139 @@
       vid.currentTime=vid.currentTime-15;
        }
 
+          $(".button_description").click(function(){
+                $(".container_description").show();
+                     $("h5").show();
+                show_backTime_chart();
+                 nextVersion();
+                 });
 
-        $(".button_description").click(function(){
-
-        $(".container_description").show();
-        show_description_chart();
-
-
-
-    });
 
 
 
 
 
           });
-             var ctx = document.getElementById('myChart').getContext('2d');
+               var ctx = document.getElementById('myChart').getContext('2d');
                var ctxPie = document.getElementById('myChartPie').getContext('2d');
+               var ctxTime = document.getElementById('myChartTime').getContext('2d');
 
 
 
 
 
 
-                // For line time chart
-                        var tRow = document.getElementById('step_tru1');
+                /////////   For line time chart   /////////////////////////////////////////////////////////////
+
+
+                        var tRow = document.getElementById('step_tru6');
+                        var tRow1 = document.getElementById('step_tru5');
+
                         var i;
+
+
+                        var all1 = new Array();
+
+
+                        var i;
+                        var i1;
+
                         var all = new Array();
-                        for (i=0; i<19; i++){
+
+
+                        for (i=0; i<=13; i++){
+
+
+
+
                         var x = tRow.children[i].innerHTML;
+
+
+
+
+
                         all[i]=x;
+
+
                         all.sort();
+
+
                         var counts = {};
-                        all.forEach(function(i) {
+
+
+
+
+
+
+                         all.forEach(function(i) {
                          counts[i] = (counts[i] || 0)+1;
 
                          });
 
-                           console.log(counts)
 
 
-                           console.log(counts)
 
-                        var key = Object.keys(counts);
+                          var key = Object.keys(counts);
                         var value = Object.values(counts);
+
+
+
+
+
+                    // callchart.js line chart
+                    func(key,value);
+                   // func1();
+
+
+
+
+
+
+}
+
+
+        function nextVersion(){
+                    for (i=0; i<=13; i++){
+
+                           var tRow1 = document.getElementById('step_tru4');
+                           var x1 = tRow1.children[i].innerHTML;
+                        all1[i]=x1;
+                        all1.sort();
+                        var counts1 = {};
+                        all1.forEach(function(i) {                         counts1[i] = (counts1[i] || 0)+1;
+
+                         });
+                         var key1 = Object.keys(counts1);
+                        var value1 = Object.values(counts1);
+                       // console.log("key"+key+"value"+value+"key1"+key1+"value1"+value1);
+                    // callchart.js line chart
+                       func1(key1,value1);
+                    // func1();
+
+}
+
+}
+
+
+         function nextVersionBacktimes(){
+
+
+         console.log("*******************inside show_backtime_chart*****");
+                        var tRowTime = document.getElementById('step_tru5');
+                        var iTime;
+                        var allTime = new Array();
+                        for (iTime=0; iTime<19; iTime++){
+                        var xTime = tRowTime.children[iTime].innerHTML;
+                        allTime[iTime]=xTime;
+                        allTime.sort();
+                        var countsTime = {};
+                        allTime.forEach(function(iTime) {
+                         countsTime[iTime] = (countsTime[iTime] || 0)+1;
+
+                         });
+
+                        var keyTime = Object.keys(countsTime);
+                        var valueTime = Object.values(countsTime);  //giving a iliterate
                        // console.log(bad_materialvalue);
                        //  var badly_explainedkey = Object.keys(counts)[1];
                        // var badly_explainedvalue = counts.badly_explained;
@@ -218,22 +611,29 @@
                        // var too_difficultvalue = counts.too_difficult;
                        // console.log(counts.too_difficultvalue);
 
-                        var valueArray =[value];
-                        var keyArray = [key];
-                        console.log("keyvalue"+valueArray);
-                        console.log("keyArray"+keyArray);
+                        var valueArrayTime =[valueTime];
+                        var keyArrayTime = [keyTime];
+                        console.log("keyvalueTime"+valueArrayTime);
+                        console.log("keyArrayTime"+keyArrayTime);
 
-
-                    func(value,key);
+                    // callchart.js line chart
+                    funcTime1(valueTime,keyTime);
 
 
 
     }
 
 
+}
 
-     // For Pie  chart
+
+
+
+
+
+                 /////////   For description pie chart   /////////////////////////////////////////////////////////////
                function show_description_chart(){
+                         $("h4").show();    //show heading
                         var tRowPie = document.getElementById('step_tru2');
                         var iPie;
                         var allPie = new Array();
@@ -264,18 +664,118 @@
                         console.log("keyvaluePie"+valueArrayPie);
                         console.log("keyArrayPie"+keyArrayPie);
 
-              //func(key,value);
+
+                    //call chart.js pie
                     funcPie(keyPie,valuePie);
     }
 }
 
 
+                /////////   For backtime chart   /////////////////////////////////////////////////////////////
+                        function show_backTime_chart(){
+                        console.log("*******************inside show_backtime_chart*****");
+                        var tRowTime = document.getElementById('step_tru3');
+                        var iTime;
+                        var allTime = new Array();
+                        for (iTime=0; iTime<19; iTime++){
+                        var xTime = tRowTime.children[iTime].innerHTML;
+                        allTime[iTime]=xTime;
+                        allTime.sort();
+                        var countsTime = {};
+                        allTime.forEach(function(iTime) {
+                         countsTime[iTime] = (countsTime[iTime] || 0)+1;
+
+                         });
+
+                        var keyTime = Object.keys(countsTime);
+                        var valueTime = Object.values(countsTime);  //giving a iliterate
+                       // console.log(bad_materialvalue);
+                       //  var badly_explainedkey = Object.keys(counts)[1];
+                       // var badly_explainedvalue = counts.badly_explained;
+                       // console.log(counts.badly_explainedvalue);
+
+                       // var too_difficultkey = Object.keys(counts)[2];
+                       // var too_difficultvalue = counts.too_difficult;
+                       // console.log(counts.too_difficultvalue);
+
+                        var valueArrayTime =[valueTime];
+                        var keyArrayTime = [keyTime];
+                        console.log("keyvalueTime"+valueArrayTime);
+                        console.log("keyArrayTime"+keyArrayTime);
+
+                    // callchart.js line chart
+                    funcTime(valueTime,keyTime);
+
+
+
+    }
+    }
+
+
+
+             // for time chart.js //
+            function funcTime(ytime,xtime){
+
+
+                    console.log("funcTime called");
+
+
+                var color =  "rgba(153,255,51,0.6)";
+                var charttime = new Chart(ctxTime, {
+               type: 'line',
+                data: 'data',
+                 options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                max:5,
+                                min: 0,
+                                stepSize: 1
+                            }
+                        }]
+                    }
+                },
+
+
+                 data:{
+                labels: xtime,
+                datasets: [
+                    {
+                        label: "BackTime button Hit Chart",
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1,
+
+                        data:ytime
+                        }]
+                    }
+
+
+                    });
 
 
 
 
+            }
 
-     function funcPie(xPie,yPie){
+
+
+            // for pie chart.js //
+            function funcPie(xPie,yPie){
 
 
                     console.log("funcPie called");
@@ -295,7 +795,7 @@
                 labels: xPie,
                 datasets: [
                     {
-
+                        label: "Pie Chart",
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
@@ -326,16 +826,12 @@
 
             }
 
-              function func(y,x){
-
-
-                    console.log("func called");
-
-
+            // for Line Chart.js //
+              function func(x,y){
 
                 var color =  "rgba(153,255,51,0.6)";
                 var chart = new Chart(ctx, {
-               type: 'line',
+               type: 'bar',
                 data: 'data',
                   options: {
                     scales: {
@@ -351,34 +847,162 @@
 
 
                  data:{
-                labels: x,
+                 labels: x,
+
+
+
+
                 datasets: [
                     {
-                        label: "Not Understanding Timestamps Chart",
+                        label: "Version 1",
+                          data:y,
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
+
+                            'rgba(55, 109, 164, 91)',
+                             'rgba(55, 259, 64, 1)',
+                              'rgba(255, 159, 64, 1)',
+                               'rgba(255, 159, 64, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                 'rgba(255, 159, 64, 1)',
+                                  'rgba(255, 159, 64, 1)',
+                                   'rgba(255, 159, 64, 1)',
+                                    'rgba(255, 159, 64, 1)',
+                                     'rgba(255, 159, 64, 1)'
+
+                        ],
+
+
+                    }
+
+                    ,
+
+
+
+                   ]
+
+
+
+
+                    },
+
+                    });
+
+
+
+
+            }
+
+  nextVersion();
+// for Line Chart.js //
+              function func1(x,y){
+
+                var color =  "rgba(153,255,51,0.6)";
+                var chart = new Chart(ctx, {
+               type: 'bar',
+                data: 'data',
+                  options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                max:5,
+                                min: 0,
+                                stepSize: 1
+                            }
+                        }]
+                    }
+                },
+
+
+                 data:{
+                 labels: x,
+
+
+
+
+                datasets: [
+                    {
+                        label: "Version 2",
+                          data:y,
+                        backgroundColor: [
+
                             'rgba(153, 102, 255, 0.2)',
+                             'rgba(153, 102, 255, 0.2)',
+                              'rgba(153, 102, 255, 0.2)',
+                               'rgba(153, 102, 255, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                 'rgba(153, 102, 255, 0.2)',
+                                  'rgba(153, 102, 255, 0.2)',
+                                   'rgba(153, 102, 255, 0.2)'
+
+                        ],
+
+
+                    }
+
+                    ,
+
+
+
+                   ]
+
+
+
+
+                    },
+
+                    });
+
+
+            }
+
+
+              // for time chart.js //
+            function funcTime1(ytime,xtime){
+
+
+                    console.log("funcTime called");
+
+
+                var color =  "rgba(113,122,51,2.6)";
+                var charttime = new Chart(ctxTime, {
+               type: 'line',
+                data: 'data',
+                 options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                max:5,
+                                min: 0,
+                                stepSize: 1
+                            }
+                        }]
+                    }
+                },
+
+
+                 data:{
+                labels: xtime,
+                datasets: [
+                    {
+                        label: "Version 2",
+                        backgroundColor: [
+
                             'rgba(255, 159, 64, 0.2)'
                         ],
                         borderColor: [
-                            'rgba(255,99,132,1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
+
                             'rgba(255, 159, 64, 1)'
                         ],
                         borderWidth: 1,
 
-                        data:y
+                        data:ytime
                         }]
                     }
 
 
                     });
+
+
 
 
             }
@@ -392,11 +1016,60 @@
 
 
 
-        </script>
-
-    </body>
 
 
-    {% endblock %}
+           // Video Controls and get backtime stamp and send to server
 
-    </html>
+                    var vid1 = document.getElementById("myVideo");
+
+                    function getCurTime() {
+
+                        var vid1 = document.getElementById("myVideo");
+                        var intvalue = Math.floor( vid1.currentTime );
+
+                        document.getElementById("id_backtimes").value = intvalue;
+
+
+
+                    }
+
+                    function setCurTime() {
+                        vid.currentTime=5;
+                    }
+
+
+
+</script>
+
+     <script type="text/javascript">
+
+
+
+
+$(function() {
+    $("#backTime_Form12").submit(function(event) {
+     alert("hi");
+        // Stop form from submitting normally
+        event.preventDefault();
+        var friendForm = $(this);
+        // Send the data using post
+        var posting = $.post( friendForm.attr('action'), friendForm.serialize() );
+        // if success:
+        posting.done(function(data) {
+            // success actions, maybe change submit button to 'friend added' or whatever
+        });
+        // if failure:
+        posting.fail(function(data) {
+            // 4xx or 5xx response, alert user about failure
+        });
+    });
+});
+
+
+
+</script>
+
+
+
+
+{% endblock %}

@@ -9,6 +9,15 @@
 
     {% block content %}
         <div class="row columns">
+            {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li
+                    {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}
+            </li>
+            {% endfor %}
+        </ul>
+            {% endif %}
             <article>
                 {{ block.super }}
                 <h1>{{ step.title }}</h1>

@@ -1,31 +1,632 @@
-    {% extends "courses/layout.html" %}
-    {% load course_extras %}
+{% extends "courses/layout.html" %}
+{% load course_extras %}
 
-    {% block title %}{{ step.title }} | {{ step.course.title }} {{ block.super }}{% endblock %}
+{% block title %}{{ step.title }} | {{ step.course.title }} {{ block.super }}{% endblock %}
 
-    {% block breadcrumbs %}
+{% block breadcrumbs %}
+    <li><a href="{% url 'courses:detail' pk=step.course.pk %}">{{ step.course.title }}</a></li>
+{% endblock %}
 
-    {% endblock %}
+{% block content %}
 
-    {% block content %}
-        <div class="row columns">
-            <article>
-                {{ block.super }}
-                <h1>{{ step.title }}</h1>
-                  <h1>{{ step.description }}</h1>
+<style>
+    .messages{
+    color: Red;
+    font-size: 30px;
 
-             <!--   <button onclick="setCurTime()" class="button">Go back 15 seconds</button><br> -->
-            </article>
-
-             <article>
-
-           <dl>
-
-            </dl>
-
-            </article>
-         </div>
+    }
 
 
+</style>
+    <div class="row columns">
+        <article>
+            {{ block.super }}
+              {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li
+                        {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
 
-    {% endblock %}
+
+            <h1>{{ step.title }}</h1>
+            <ul class="no-bullet">
+                {% for question in step.question_set.all %}
+                <li>
+                   <h2>{{ question.prompt }}</h2>
+                    {% for answer in question.answer_set.all %}
+
+
+                    <!--{% if answer.correct %}success{% endif %}-->
+                       <div class="callout {% if answer.correct %}{% endif %}">Option {{ answer.order }}: {{ answer.text }} </div>
+                    {% endfor %}
+
+
+
+
+
+
+
+
+                </li>
+                {% endfor %}
+            </ul>
+        </article>
+
+        <hr>
+
+          <h3>Select An Option</h3>
+    <form method="POST" action="" id="optionForm">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" onclick="show()" class ="button" value="Submit">
+
+    </form>
+
+       <a href="{% url 'courses:create_question' quiz_pk=step.pk question_type="mc" %}" class="button">New Multiple Choice</a>
+       <input type="button" class="button" value="Show Results">
+
+
+
+
+
+
+
+
+
+
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+
+
+
+                     <div id="step23">
+                          {% for step in answer_correct_order %}
+
+                          <h4>Percentage version {{ step.text_version }} Correct :{{ step.percentage_correct }}%</h4>
+
+
+                          {% endfor %}
+                     </div>
+                       <div id="step24">
+                          {% for step in answer_correct_order %}
+
+                          <h5>Previous Version Percentage Correct :{{ step.previous_version_percentage }}%</h5>
+
+
+                          {% endfor %}
+                     </div>
+                    <div id="step_tru25">
+    {% for step in answer_correct_order %}
+
+<div id="par25">{{ step.previous_version_percentage }}</div>
+
+
+
+    {% endfor %}
+
+
+</div>
+
+                           <div id="step_tru26">
+   {% for step in answer_correct_order %}
+
+                          <div id="par26">{{ step.percentage_correct }}</div>
+
+
+                          {% endfor %}
+
+
+</div>
+
+
+        <canvas id="myChart" ></canvas>
+        <canvas id="myChart3"></canvas>
+
+
+
+
+
+
+        <div id="step_tru1">
+    {% for step in steps %}
+
+   <div id="par1">{{ step.count }}</div>
+
+
+    {% endfor %}
+
+
+</div>
+
+              <div id="step_tru2">
+    {% for step in steps %}
+
+   <div id="par2">{{ step.text }}</div>
+
+
+    {% endfor %}
+
+
+</div>
+
+                     <div id="step_tru3">
+    {% for step in steps_wrong %}
+
+   <div id="par3">{{ step.count }}</div>
+
+
+    {% endfor %}
+                         </div>
+
+     <div id="step_tru4">
+    {% for step in steps_wrong %}
+
+   <div id="par4">{{ step.correct }}</div>
+
+
+    {% endfor %}
+
+
+
+
+</div>
+
+                          <div id="step_tru5">
+    {% for step in steps_version2 %}
+
+   <div id="par5">{{ step.count }}{{ step.percentage_correct }}</div>
+
+
+    {% endfor %}
+
+
+
+
+</div>
+
+                             <div id="step_tru6">
+    {% for step in steps_version2 %}
+
+   <div id="par6">{{ step.text }}{{ step.percentage_correct }}</div>
+
+
+    {% endfor %}
+
+
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+      $(document).ready(function(){
+
+                 $("#step_tru1").hide();
+                 $("#step_tru2").hide();
+                  $("#step_tru3").hide();
+                   $("#step_tru4").hide();
+                    $("#step_tru5").hide();
+                     $("#step_tru6").hide();
+                  $("#step_tru25").hide();
+                  $("#step_tru26").hide();
+                   $("#myChart").hide();
+                   $("#myChart3").hide();
+                   $("h5").hide();
+                   $("h4").hide();
+
+
+                   var tRow = document.getElementById('step_tru25');
+                    var tRow1 = document.getElementById('step_tru26');
+
+                 // var x = tRow.children[0].innerHTML;
+                 var all = new Array();
+                 var all1 = new Array();
+
+                  for (i=0; i<=23; i++){
+
+
+
+
+                        var x = tRow.children[i].innerHTML;
+                         var x1 = tRow1.children[i].innerHTML;
+
+                      all[i]=x;
+                      all1[i]=x1;
+
+                       all.sort();
+                        all1.sort();
+
+
+
+                  funcPie(x,x1);
+}
+
+
+
+
+
+
+
+
+
+     });
+
+
+        $(".button_version").click(function(){
+
+                  nextVersion();
+            });
+
+              $(".button").click(function(){
+
+                  show();
+            });
+
+
+var ctx = document.getElementById("myChart").getContext('2d');
+
+var ctx3 = document.getElementById("myChart3").getContext('2d');
+
+
+
+   /////////   For line time chart   /////////////////////////////////////////////////////////////
+
+                        console.log("before tRow")
+                        var tRow = document.getElementById('step_tru2');
+
+                        var tRow1 = document.getElementById('step_tru1');
+                        console.log("tRow"+tRow)
+                        var i;
+                        var all1 = new Array();
+                        var i;
+                        var i1;
+
+                        var all = new Array();
+                        for (i=0; i<=13; i++){
+
+                        var x = tRow.children[i].innerHTML;
+                        var y = tRow1.children[i].innerHTML;
+
+                        all[i]=x;
+
+                        all1[i]=y;
+
+                        all.sort();
+                        all1.sort();
+                        var counts = {};
+
+                        var counts1 = {};
+
+                         all.forEach(function(i) {
+                         counts[i] = (counts[i] || 0)+1;
+
+
+                         });
+                          all1.forEach(function(i) {
+                         counts1[i] = (counts1[i] || 0)+1;
+
+                         });
+
+                          var count = Object.values(counts);
+                          var key = Object.keys(counts);
+                          var key1 = Object.keys(counts1);
+
+
+                        var value = Object.values(counts);
+                        console.log("key"+key)
+                        console.log("key1"+key1)
+                        console.log("count"+count)
+
+
+
+                    // callchart.js line chart
+                    func(key,key1);
+
+
+
+}
+
+function nextVersion(){
+              console.log("before tRow")
+                        var tRow = document.getElementById('step_tru6');
+
+                        var tRow1 = document.getElementById('step_tru5');
+                        console.log("tRow"+tRow)
+                        var i;
+                        var all1 = new Array();
+                        var i;
+                        var i1;
+
+                        var all = new Array();
+                        for (i=0; i<=13; i++){
+
+                        var x = tRow.children[i].innerHTML;
+                        var y = tRow1.children[i].innerHTML;
+
+                        all[i]=x;
+
+                        all1[i]=y;
+
+                        all.sort();
+                        all1.sort();
+                        var counts = {};
+
+                        var counts1 = {};
+
+                         all.forEach(function(i) {
+                         counts[i] = (counts[i] || 0)+1;
+
+
+                         });
+                          all1.forEach(function(i) {
+                         counts1[i] = (counts1[i] || 0)+1;
+
+                         });
+
+                          var count = Object.values(counts);
+                          var key = Object.keys(counts);
+                          var key1 = Object.keys(counts1);
+
+
+                        var value = Object.values(counts);
+                        console.log("key"+key)
+                        console.log("key1"+key1)
+                        console.log("count"+count)
+
+
+
+                    // callchart.js line chart
+                    func1(key,key1.reverse());
+
+
+
+}
+
+
+
+}
+
+
+   // for Line Chart.js //
+              function func(x,y){
+
+              console.log("inside")
+
+                var color =  "rgba(153,255,51,0.6)";
+                var chart = new Chart(ctx, {
+               type: 'bar',
+                data: 'data',
+                  options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                max:15,
+                                min: 0,
+                                stepSize: 2
+                            }
+                        }]
+                    }
+                },
+
+
+                 data:{
+                 labels: x,
+
+                datasets: [
+                    {
+                        label: "Answers Giving",
+                          data:y,
+                        backgroundColor: [
+
+                            'rgba(255, 159, 64, 1)',
+                             'rgba(255, 159, 64, 1)',
+                              'rgba(255, 159, 64, 1)',
+                               'rgba(255, 159, 64, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                 'rgba(255, 159, 64, 1)',
+                                  'rgba(255, 159, 64, 1)',
+                                   'rgba(255, 159, 64, 1)',
+                                    'rgba(255, 159, 64, 1)',
+                                     'rgba(255, 159, 64, 1)'
+
+                        ],
+
+
+                    }
+
+                    ,
+
+
+
+                   ]
+
+
+
+
+                    },
+
+                    });
+
+
+
+
+            }
+
+             // for Line Chart.js //
+              function func1(x,y){
+
+              console.log("inside")
+
+                var color =  "rgba(153,255,51,0.6)";
+                var chart = new Chart(ctx, {
+               type: 'bar',
+                data: 'data',
+                  options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                max:5,
+                                min: 0,
+                                stepSize: 1
+                            }
+                        }]
+                    }
+                },
+
+
+                 data:{
+                 labels: x,
+
+                datasets: [
+                    {
+                        label: "Version 2",
+                          data:y,
+                        backgroundColor: [
+
+                            'rgba(215, 19, 114, 61)',
+                             'rgba(215, 19, 114, 61)',
+                               'rgba(215, 19, 114, 61)',
+                                'rgba(215, 19, 114, 61)',
+                                 'rgba(25, 19, 14, 1)',
+                                 'rgba(255, 159, 64, 1)',
+                                  'rgba(255, 159, 64, 1)',
+                                   'rgba(255, 159, 64, 1)',
+                                    'rgba(255, 159, 64, 1)',
+                                     'rgba(255, 159, 64, 1)'
+
+                        ],
+
+
+                    }
+
+                    ,
+
+
+
+                   ]
+
+
+
+
+                    },
+
+                    });
+
+
+
+
+            }
+
+
+
+function funcPie(value1,value2){
+console.log("value1"+value1);
+console.log("value2"+value2);
+
+  var color =  "rgba(153,255,51,0.6)";
+var myChart3 = new Chart(ctx3, {
+    type: 'line',
+    data: {
+        labels: ["Previous Version","Current version"],
+        datasets: [{
+            label: '% Difference in version answers',
+            data: [value1,value2],
+            backgroundColor: [
+                'rgba(255, 199, 132, 0.2)',
+                 'rgba(255, 199, 332, 3.2)',
+
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                 'rgba(255, 99, 132, 0.2)',
+
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+
+
+
+}
+
+
+function show(){
+
+
+                   $("#myChart").show();
+                   $("#myChart3").show();
+                   $("h5").show();
+                   $("h4").show();
+
+
+
+
+
+}
+
+
+
+
+
+
+</script>
+
+            <script >
+
+    $("#optionForm3").submit(function(event) {
+
+
+
+        //set time back 15 seconds
+
+
+        //document.write(5 + 6);
+        // Stop form from submitting normally
+        event.preventDefault();
+        var optionForm = $(this);
+        // Send the data using post
+        var posting = $.post( optionForm.attr('action'), optionForm.serialize() );
+        // if success:
+          //  vid.currentTime=vid.currentTime-15;
+        posting.done(function(data) {
+        show();
+
+
+            // success actions, maybe change submit button to 'friend added' or whatever
+        });
+        // if failure:
+        posting.fail(function(data) {
+
+            // 4xx or 5xx response, alert user about failure
+        });
+    });
+
+
+
+</script>
+
+    </div>
+{% endblock %}
