@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="dc29edbd-5577-4290-bcf3-99a1e914177b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/learning_site/projectsite" afterPath="$PROJECT_DIR$/learning_site/projectsite" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Django Feedback Project.iws" />
     <ignored path=".idea/workspace.xml" />
