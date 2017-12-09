@@ -4,6 +4,7 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
+
 FEEDBACK_OPTIONS = (
     ('BADLY EXPLAINED', 'Badly Explained'),
     ('TO COMPLICATED', 'To Complicated'),
@@ -52,6 +53,8 @@ class Step(models.Model):
 class Text(Step):
     content = models.TextField(blank=True, default='', null=True)
     video = models.FileField( null=True)
+    #video = EmbedVideoField()
+
     time = models.IntegerField(default = 10, null=True)
     version = models.IntegerField(default=1, null=True)
     new = models.TextField(default="Noting new", null=True)

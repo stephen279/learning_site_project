@@ -7,7 +7,19 @@
 
     @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,500,300italic,500italic,700italic,900,300);
 
+body {
 
+}
+
+video {
+   max-width:74rem;
+   width:100%;
+   max-height:30.875rem;
+   height:100%;
+   margin:0.25rem auto;
+   padding:0.051%;
+   background-color:#F5F5F5;
+}
 
 .flip-container {
   margin: 0 auto;
@@ -107,13 +119,22 @@
     z-index: 1;
     left: 135px;
 }
+.logo {
+  background: transparent url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMhH24UNs-GDgUH6La-p5vz6HRwBqXVsA6fdWatwwwnCJ09c9daA') center center no-repeat;
+  width: 195px;
+  background-size: contain;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
 
 
 </style>
+<h1 class="logo">Logo</h1>
     <div class="row">
-        <h1>Welcome</h1>
+        <h1>Welcome to My Learning Site</h1>
 
-
+<!--
 
     <div class="flip-container">
   <div class="flipper">
@@ -149,9 +170,23 @@
 </div>
 
 
+--><video width="1200" controls>
+  <source src="https://s3-eu-west-1.amazonaws.com/mylearningsitebucket/19CO3.mp4" type="video/mp4">
+  <source src="https://s3-eu-west-1.amazonaws.com/mylearningsitebucket/19CO3.mp4" type="video/ogg">
+  Your browser does not support HTML5 video.
+</video>
+
+<p>
+
+<a href="https://s3-eu-west-1.amazonaws.com/mylearningsitebucket/19CO3.mp4" target="_blank"></a>.
+</p>
 
 
     </div>
+
+
+
+
 {% endblock %}
 
 

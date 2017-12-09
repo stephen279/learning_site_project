@@ -2,11 +2,13 @@
 {% load static from staticfiles %}
 {% load course_extras %}
 <html class="no-js" lang="en">
-    <head>
+    <head>fffffffffff
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="{% static 'css/foundation.min.css' %}">
+        <link rel="icon" type="image/x-icon" href=" /media/imagesi.png ">
+
       <!--  <link rel="stylesheet" href="{% static 'css/layout.css' %}">-->
         {% block css %}{% endblock %}
         <script src="{% static 'js/vendor/modernizr.js' %}"></script>
@@ -18,31 +20,54 @@
 
 
          <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+          <script src="http://api.html5media.info/1.1.5/html5media.min.js"></script>
 
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/ui-darkness/jquery-ui.css" rel="stylesheet">
 
     </head>
     <body>
+
         <nav class="top-bar" role="navigation">
             <section class="top-bar-left">
                 <ul class="dropdown menu" data-dropdown-menu role="menubar">
-                    <li class="menu-text">My Project Site</li>
+                    <li class="menu-text">My Learning Site</li>
                     <li class="has-submenu">
                         <a href="#">Courses</a>
+
                         <ul class="submenu menu vertical" data-submenu role="menu">
                             {% nav_courses_list %}
                             <li><a href="{% url 'courses:list' %}">See all &rarr;</a></li>
+
                         </ul>
                     </li>
                 </ul>
+
+
+
+            </section>
+             <section class="top-bar-right">
+                <ul class="dropdown menu" data-dropdown-menu role="menubar">
+
+                    <li class="has-submenu">
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Sign In</a></li>
+
+
+
+                    </li>
+                </ul>
+
+
+
             </section>
         </nav>
         {% block content %}{% endblock %}
         <footer class="row columns">
             <hr/>
             <div class="small-6 columns">
-                <h7>&copy; My Project Site</h7>
+                <h7>&copy; My Learning Site</h7>
             </div>
             <div class="small-6 columns">
                 <ul class="inline-list no-bullet float-right">

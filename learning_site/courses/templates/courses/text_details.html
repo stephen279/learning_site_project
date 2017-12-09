@@ -5,14 +5,14 @@
 
 {% block breadcrumbs %}
 
-   <li><a href="{% url 'courses:detail' pk=step.course.pk %}">{{ step.course.title }}</a></li>
+<li><a href="{% url 'courses:detail' pk=step.course.pk %}">{{ step.course.title }}</a></li>
 {% endblock %}
 
 {% block content %}
 
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <script >
+<script>
     $(document).ready(function(){
     $("#backTime_Form1").submit(function(event) {
 
@@ -44,10 +44,11 @@ getCurTime();
 });
 
 
+
 </script>
 
-    <meta charset="UTF-8">
-    <style type="text/css">
+<meta charset="UTF-8">
+<style type="text/css">
 
 
                  .button1 {
@@ -175,43 +176,40 @@ video {
 
 
 
-    </style>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+</style>
 
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 
 
-
-
-
- <div class="row columns">
+<div class="row columns">
     <article>
         {{ block.super }}
         <h1>{{ step.title }} </h1>
 
-        <h7>  {% for step in steps|slice:":1"%}     <!--shown iterate of values need to cut to one use slice-->
-          <dd> Version:{{ step.step.version}} &nbsp; <button class="button_new">Whats New?</button></dd>
+        <h7> {% for step in steps|slice:":1"%}     <!--shown iterate of values need to cut to one use slice-->
+            <dd> Version:{{ step.step.version}} &nbsp;
+                <button class="button_new">Whats New?</button>
+            </dd>
         </h7>
 
         {% endfor%}</h7>
 
 
-
-
-        <h6>  {% for step in steps|slice:":1"%}     <!--shown iterate of values need to cut to one use slice-->
+        <h6> {% for step in steps|slice:":1"%}     <!--shown iterate of values need to cut to one use slice-->
 
             <dd> {{ step.step.new}}</dd>
 
-        {% endfor%}</h6>
+            {% endfor%}
+        </h6>
 
-        <video id="myVideo" autobuffer width="580" height="576" controls>
+        <video id="myVideo" video preload="auto" autobuffer width="580" height="576" controls preload>
             <source src="{{ step.video.url  }}" type="video/mp4">
+
 
             Your browser does not support HTML5 video.
         </video>
@@ -221,26 +219,22 @@ video {
         {% endfor %}
 
 
-<div class="row columns">
-        <!--   <buttonTime onclick="getCurTime()" class="button default">Get current time position</buttonTime>   -->
-          <form method="POST" action="" id="backTime_Form1">     <!--  remember id is used to stop refresh of page -->
+        <div class="row columns">
+            <!--   <buttonTime onclick="getCurTime()" class="button default">Get current time position</buttonTime>   -->
+            <form method="POST" action="" id="backTime_Form1">     <!--  remember id is used to stop refresh of page -->
                 {% csrf_token %}
 
                 {{ form.as_p }}
-                <input type="submit" class="button"  onclick="getCurTime()" value=" Confused? go back 15 sec "/>
+                <input type="submit" class="button" onclick="getCurTime()" value=" Confused? go back 15 sec "/>
 
-            <!--  <div class="round-button"><div class="round-button-circle"><a href="http://example.com" class="round-button">Button!!</a></div></div>-->
-
+                <!--  <div class="round-button"><div class="round-button-circle"><a href="http://example.com" class="round-button">Button!!</a></div></div>-->
 
 
             </form>
         </div>
 
 
-
-
-
-<div class="callout {% if answer.correct %}{% endif %}"> {{ step.content }}</div>
+        <div class="callout {% if answer.correct %}{% endif %}"> {{ step.content }}</div>
 
         <button class="button1">Show Feedbacks</button>
 
@@ -266,122 +260,109 @@ video {
         Feedback</a>
 
 
-
-
-<!-- Ratings Chart canvas -->
+    <!-- Ratings Chart canvas -->
 
     <h2> Ratings Chart </h2>
     <button class="button_version">Show More Versions</button>
 
 
-        <canvas id="myChart" width="360" height="106"></canvas>
-
-
-
+    <canvas id="myChart" width="360" height="106"></canvas>
 
 
     <br>
 
 
+    <h4> Feedback Chart </h4>
+    <canvas id="myChartPie" width="360" height="136"></canvas>
 
 
-
-        <h4> Feedback Chart </h4>
-        <canvas id="myChartPie" width="360" height="136">   </canvas>
-
-
-         <button class="button_description">Show More Charts</button>
-
+    <button class="button_description">Show More Charts</button>
 
 
     <div id="TimeChartDiv">
         <h5> BackTime Button Press Chart </h5>
-          <button class="button_version_backtime">Show More Versions</button>
-        <canvas id="myChartTime" width="260" height="106">  </canvas>
+        <button class="button_version_backtime">Show More Versions</button>
+        <canvas id="myChartTime" width="260" height="106"></canvas>
     </div>
 
 
+    <!-- innerHTML for ratinga -->
+
+    <div id="step_tru1">
+        {% for step in steps %}
+
+        <div id="par1">{{ step.rating }}</div>
 
 
-<!-- innerHTML for ratinga -->
-
-<div id="step_tru1">
-    {% for step in steps %}
-
-    <div id="par1">{{ step.rating }}</div>
+        {% endfor %}
 
 
-    {% endfor %}
+    </div>
+
+    <div id="step_tru2">
+        {% for step in steps %}
+
+        <div id="par2">{{ step.feedback }}</div>
 
 
-</div>
-
-<div id="step_tru2">
-    {% for step in steps %}
-
-    <div id="par2">{{ step.feedback }}</div>
+        {% endfor %}
 
 
-    {% endfor %}
+    </div>
 
 
-</div>
+    <div id="step_tru3">
+        {% for step in times %}
+
+        <div id="par3">{{ step.backtimes }}</div>
 
 
-<div id="step_tru3">
-    {% for step in times %}
-
-    <div id="par3">{{ step.backtimes }}</div>
+        {% endfor %}
 
 
-    {% endfor %}
+    </div>
 
 
-</div>
+    <div id="step_tru4">
+        {% for step in stepsversion %}
+
+        <div id="par4">{{ step.rating }}</div>
 
 
-<div id="step_tru4">
-    {% for step in stepsversion %}
-
-    <div id="par4">{{ step.rating }}</div>
+        {% endfor %}
 
 
-    {% endfor %}
+    </div>
 
 
-</div>
+    <div id="step_tru5">
+        {% for step in timesvers %}
+
+        <div id="par5">{{ step.backtimes }}</div>
 
 
-<div id="step_tru5">
-    {% for step in timesvers %}
-
-    <div id="par5">{{ step.backtimes }}</div>
+        {% endfor %}
 
 
-    {% endfor %}
+    </div>
 
 
-</div>
+    <div id="step_tru6">
+        {% for step in stepsvers %}
+
+        <div id="par6">{{ step.rating }}</div>
 
 
-     <div id="step_tru6">
-    {% for step in stepsvers %}
-
-    <div id="par6">{{ step.rating }}</div>
+        {% endfor %}
 
 
-    {% endfor %}
+    </div>
 
 
-</div>
+    <!-- function for rating canvas -->
 
 
-
-
-<!-- function for rating canvas -->
-
-
-<script>
+    <script>
 
 
 
@@ -1040,9 +1021,10 @@ video {
 
 
 
-</script>
 
-     <script type="text/javascript">
+    </script>
+
+    <script type="text/javascript">
 
 
 
@@ -1068,9 +1050,8 @@ $(function() {
 
 
 
-</script>
+
+    </script>
 
 
-
-
-{% endblock %}
+    {% endblock %}

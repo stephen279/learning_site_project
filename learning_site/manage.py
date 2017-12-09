@@ -13,4 +13,4 @@ if __name__ == "__main__":
         pymysql.install_as_MySQLdb()
     except ImportError:
         pass
-    execute_from_command_line(sys.argv)
+    #execute_from_command_line(sys.argv)
