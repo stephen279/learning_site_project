@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'courses',
     'storages',
+"ckeditor",
 )
 
 MIDDLEWARE_CLASSES = (
@@ -152,6 +153,7 @@ STATICFILES_DIRS = (
 )
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+CKEDITOR_BASEPATH = "/my_static/ckeditor/ckeditor"
 
 
 AWS_ACCESS_KEY_ID = 'AKIAJEW3XBL5RXLUV7VQ'
@@ -188,3 +190,22 @@ MEDIAFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 MEDIA_URL = 'http://s3-eu-west-1.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME + '/'
 
+#...
+SITE_ID = 1
+
+####################################
+    ##  CKEDITOR CONFIGURATION ##
+####################################
+
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = "pillow"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None,
+    },
+}
+
+###################################

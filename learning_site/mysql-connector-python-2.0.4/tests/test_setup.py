@@ -120,7 +120,7 @@ class SetupInfoTests(tests.MySQLConnectorTests):
         """Test miscellaneous data such as URLs"""
         import setupinfo
         self.assertEqual(
-            'http://dev.mysql.com/doc/connector-python/en/index.html',
+            'http://dev.mysql.com/doc/connector-python/en/home.html',
             setupinfo.url)
         self.assertEqual(
             'http://dev.mysql.com/downloads/connector/python/',
