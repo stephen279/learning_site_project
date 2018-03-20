@@ -68,7 +68,7 @@ maintainer = 'Geert Vanderkelen'
 maintainer_email = 'geert.vanderkelen@oracle.com'
 cpy_gpl_license = "GNU GPLv2 (with FOSS License Exception)"
 keywords = "mysql db",
-url = 'http://dev.mysql.com/doc/connector-python/en/home.html'
+url = 'http://dev.mysql.com/doc/connector-python/en/index.html'
 download_url = 'http://dev.mysql.com/downloads/connector/python/'
 classifiers = [
     'Development Status :: %s' % (DEVELOPMENT_STATUSES[VERSION[3]]),
